@@ -12,24 +12,54 @@
 
 #include "push_swap.h"
 
-void	free_list(t_node *node)
+void	free_stack(t_stack *stack, int free_struct)
 {
 	t_node	*tmp;
 
-	while (node)
-	{
-		tmp = node -> next;
-		free (node);
-		node = tmp;
-	}
-}
-
-void	free_stack(t_stack *stack, int free_struct)
-{
 	if (!stack)
 		return ;
-	free_list(stack -> a);
-	free_list(stack -> b);
-	if (free_struct)
-		free(stack);
+	while (stack -> a)
+	{
+		tmp = stack -> a;
+		stack -> a = stack -> a -> next;
+		free(tmp);
+	}
+	while (stack -> b)
+	{
+		tmp = stack -> b;
+		stack -> b = stack -> b -> next;
+		free(tmp);
+	}
+	if (free_struct && stack)
+		free (stack);
+}
+
+void	free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	if (!split)
+		return ;
+	while (split[i])
+	{
+		free(split[i]);
+		i ++;
+	}
+	free(split);
+}
+
+void	free_moves(char **moves, int count)
+{
+	int	i;
+
+	i = 0;
+	if (!moves)
+		return ;
+	while (i < count)
+	{
+		free(moves[i]);
+		i ++;
+	}
+	free(moves);
 }

@@ -63,11 +63,9 @@ void	init_ctx(t_context *ctx, t_stack *copy)
 int	compute_radix_cost(t_stack *original)
 {
 	int			total;
-	int			i;
 	t_stack		*copy;
 	t_context	ctx;
 
-	i = 0;
 	copy = copy_t_stack(original);
 	if (!copy)
 		return (-1);
@@ -76,9 +74,7 @@ int	compute_radix_cost(t_stack *original)
 		return (-1);
 	radix_sort(&ctx);
 	total = ctx.cost;
-	while (i < ctx.move_count)
-		free(ctx.moves[i++]);
-	free(ctx.moves);
+	free_moves(ctx.moves, ctx.move_count);
 	free_stack(ctx.stack, 1);
 	return (total);
 }

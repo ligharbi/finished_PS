@@ -109,7 +109,9 @@ void	sort_four(t_stack *s);
 void	sort_five(t_stack *s);
 void	free_list(t_node *node);
 void	free_stack(t_stack *s, int v);
-void	push_swap(int ac, char **av, t_stack *s, int *sorted_tab);
+void	free_moves(char **moves, int count);
+void	free_split(char **split);
+void	push_swap(int ac, char **av, int *sorted_tab, bool need_free);
 int	main(int ac, char **av);
 
 #endif
